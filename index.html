@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Phoebe</title>
+
+<style>
+
+body{margin:0;background:#09070d;color:#fff;font-family:system-ui;display:grid;place-items:center;min-height:100vh}
+
+#loading{text-align:center;opacity:.8}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loading">Opening your invitation…</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<script>
+
+(async()=>{
+
+  try{
+
+    const r=await fetch('./%20%20%20%20index.html%20',{cache:'no-store'});
+
+    const zip=await JSZip.loadAsync(await r.arrayBuffer());
+
+    const html=await zip.file('index.html').async('text');
+
+    document.open();
+
+    document.write(html);
+
+    document.close();
+
+  }catch(e){
+
+    document.getElementById('loading').textContent='Could not load the invitation. Refresh and try again.';
+
+  }
+
+})();
+
+</script>
+
+</body>
+
+</html>
